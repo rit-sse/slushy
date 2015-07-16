@@ -2,6 +2,7 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var app        = express();
 var http       = require('http').Server(app);
+var config     = require('./../config.json');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -57,6 +58,11 @@ commands.help = {
 
 router.route('/sse')
     .post(function (req, res) {
+        if (req.body.token !== config.slackToken) {
+            res.status(401).send('Bad Slack token.');
+            return;
+        }
+
         var metadata = {
             channelId : req.body.channel_id,
             channelName : req.body.channel_name,

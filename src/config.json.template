@@ -1,0 +1,14 @@
+{
+    "slackToken" : "slack integration token goes here",
+    "whitelists" : {
+        "command" : [
+            "whitelisted user ID 1",
+            "whitelisted user ID 2",
+            "whitelisted user ID 3"
+        ],
+        "another-command" : [
+            "whitelisted user ID 1",
+            "whitelisted user ID 2"
+        ]
+    }
+}
