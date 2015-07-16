@@ -79,7 +79,8 @@ router.route('/sse')
             res.send('`' + command + '` is not a valid command. Type `/sse ' +
                 'help` to see a list of available commands.');
         } else {
-            var result = commands[command].run(metadata, args);
+            var result = '`/sse ' + req.body.text + '`\n';
+            result += commands[command].run(metadata, args);
             res.send(result);
         }
     });
