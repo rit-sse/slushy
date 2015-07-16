@@ -1,0 +1,26 @@
+{
+  "name": "Slash-SSE",
+  "version": "0.0.1",
+  "description": "The one-stop shop SSE Slack integration",
+  "author": "Society of Software Engineers @ RIT <president@sse.se.rit.edu>",
+  "contributors": [
+    {
+      "name": "Matt Mokary",
+      "email": "mxm6060@rit.edu"
+    }
+  ],
+  "scripts": {
+    "start": "node src/js/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rit-sse/slashsse"
+  },
+  "bugs": {
+    "url": "https://github.com/rit-sse/slashsse/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1"
+  }
+}
