@@ -1,5 +1,5 @@
 {
-  "name": "Slash-SSE",
+  "name": "slushy",
   "version": "0.0.1",
   "description": "The one-stop shop SSE Slack integration",
   "author": "Society of Software Engineers @ RIT <president@sse.se.rit.edu>",
@@ -14,10 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rit-sse/slashsse"
+    "url": "https://github.com/rit-sse/slushy"
   },
   "bugs": {
-    "url": "https://github.com/rit-sse/slashsse/issues"
+    "url": "https://github.com/rit-sse/slushy/issues"
   },
   "dependencies": {
     "body-parser": "^1.13.2",

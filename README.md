@@ -1,2 +1,3 @@
-# slashsse
+# slushy
+
 Project that provides commands for the SSE slack team.
