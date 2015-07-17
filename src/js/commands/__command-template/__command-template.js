@@ -25,8 +25,7 @@ var api = {
         // this help text is shown as a short summary of your command in the
         // '/sse help' list of commands. It should be a one-sentence,
         // high-level description of what your command does.
-        return 'Look up names and contact info of primary officers and ' +
-            'committee heads within the SSE';
+        return '';
     }
 };
 

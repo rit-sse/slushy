@@ -14,7 +14,8 @@ var router = express.Router();
 // must match the directory and file (without .js extension) names in
 // the commands/ directory (e.g. 'help' => commands/help/help.js)
 var commandsToLoad = [
-    'whois'
+    'whois',
+    'lingo'
 ];
 
 var commands = {};
