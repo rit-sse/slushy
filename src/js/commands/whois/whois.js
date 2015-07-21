@@ -1,19 +1,30 @@
-// until we get DB stuff figured out
-var data = require('./whois.json');
+var getWhoisResponse = function (api, position, callback) {
+    api.Officers.all({ position : position }, function (err, res) {
+        if (res.body.length === 0) {
+            callback('Unrecognized position: ' + position + '. Type `/sse ' +
+                'help whois` to see all positions.');
+        } else {
+            var officer = res.body[0];
+
+            api.Members.one(officer.member_id, function (err, res) {
+                var member = res.body;
+
+                callback(position + ': ' + member.first_name + ' ' +
+                    member.last_name);
+            });
+        }
+    });
+};
 
 var api = {
-    run : function (metadata, args) {
-        var position = args.join(' '),
-            returnText = '';
+    run : function (metadata, args, callback, api) {
+        var position = args.join(' ');
 
-        if (data[data.CURRENT_TERM][position]) {
-            returnText = data[data.CURRENT_TERM][position]
+        if (position.length) {
+            getWhoisResponse(api, position, callback);
         } else {
-            returnText = 'Unrecognized position: ' + position +
-                '. Type `/sse help whois` to see all positions.';
+            callback(this.help(true));
         }
-
-        return returnText;
     },
 
     help : function (usage) {
