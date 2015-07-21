@@ -2,15 +2,14 @@ var _ = require('underscore');
 
 var sendLingoResponse = function (api, lingo, callback) { 
     api.Lingo.all({ phrase : lingo }, function (err, res) {
-        var responseBody = JSON.parse(res.text),
-            returnText = '';
+        var returnText = '';
 
-        if (responseBody.length === 0) {
+        if (res.body.length === 0) {
             returnText = lingo + ' was not recognized as SSE lingo. Talk to a' +
                 ' mentor or SSE officer to have it added! Type `/sse lingo ' +
                 'list` to see all lingo entries.';
         } else {
-            var entry = responseBody[0];
+            var entry = res.body[0];
             returnText = entry.phrase + ' -- ' + entry.definition;
         }
 
@@ -23,7 +22,7 @@ var sendLingoListResponse = function (api, callback) {
         ' following: ';
 
     api.Lingo.all(function (err, res) {
-        var lingos = JSON.parse(res.text);
+        var lingos = res.body;
         var phrases = _.pluck(lingos, 'phrase');
 
         callback(returnText + phrases.join(', '));
