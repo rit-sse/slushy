@@ -22,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
-    "sse-api-client": "rit-sse/api-client"
+    "sse-api-client": "rit-sse/api-client",
+    "underscore": "^1.8.3"
   }
 }

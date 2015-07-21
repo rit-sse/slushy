@@ -1,27 +1,45 @@
-var data = require('./lingo.json');
+var _ = require('underscore');
 
-var api = {
-    run : function (metadata, args) {
-        var returnText = '';
+var sendLingoResponse = function (api, lingo, callback) { 
+    api.Lingo.all({ phrase : lingo }, function (err, res) {
+        var responseBody = JSON.parse(res.text),
+            returnText = '';
 
-        if (!(args && args.length)) {
-            returnText = this.help(true);
-        } else if (args[0] === 'list') {
-            returnText = 'Use `/sse lingo <phrase>` for a definition of any ' +
-                'of the following: ' + Object.keys(data.lingo).join(', ');
+        if (responseBody.length === 0) {
+            returnText = lingo + ' was not recognized as SSE lingo. Talk to a' +
+                ' mentor or SSE officer to have it added! Type `/sse lingo ' +
+                'list` to see all lingo entries.';
         } else {
-            var lingo = args.join(' ');
-            
-            if (!data.lingo[lingo]) {
-                returnText = lingo + ' was not recognized as SSE lingo. Talk' +
-                    ' to a mentor or SSE officer to have it added! Type ' +
-                    '`/sse lingo list` to see all lingo entries.';
-            } else {
-                returnText = lingo + ' -- ' + data.lingo[lingo];
-            }
+            var entry = responseBody[0];
+            returnText = entry.phrase + ' -- ' + entry.definition;
         }
 
-        return returnText;
+        callback(returnText);
+    });
+};
+
+var sendLingoListResponse = function (api, callback) {
+    var returnText = 'Use `/sse lingo <phrase> for a definition of any of the' +
+        ' following: ';
+
+    api.Lingo.all(function (err, res) {
+        var lingos = JSON.parse(res.text);
+        var phrases = _.pluck(lingos, 'phrase');
+
+        callback(returnText + phrases.join(', '));
+    });
+};
+
+var api = {
+    run : function (metadata, args, callback, api) {
+        if (!(args && args.length)) {
+            callback(this.help(true));
+        } else if (args[0] === 'list') {
+            sendLingoListResponse(api, callback);
+        } else {
+            var lingo = args.join(' ');
+            sendLingoResponse(api, lingo, callback);
+        }
     },
 
     help : function (usage) {

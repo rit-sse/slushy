@@ -1,7 +1,8 @@
 var express    = require('express');
 var bodyParser = require('body-parser');
 var app        = express();
-var http       = require('http').Server(app);
+var http       = require('http').Server(app); 
+var API        = require('sse-api-client');
 var config     = require('./../config.json');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -9,6 +10,8 @@ app.use(bodyParser.json());
 
 var port   = process.env.PORT || 8080;
 var router = express.Router();
+
+var _api = new API(config.apiRoot);
 
 // all commands are listed here.
 // must match the directory and file (without .js extension) names in
@@ -25,7 +28,7 @@ commandsToLoad.forEach(function (command) {
 
 // help is kind of a meta command, so it's here and not in commands/
 commands.help = {
-    run : function (metadata, args) {
+    run : function (metadata, args, callback, api) {
         var helpText = '';
 
         if (args && args.length) {
@@ -41,7 +44,8 @@ commands.help = {
             }
             helpText += '```';
         }
-        return helpText;
+
+        callback(helpText);
     },
 
     help : function (usage) {
@@ -87,8 +91,9 @@ router.route('/sse')
                 'help` to see a list of available commands.');
         } else {
             var result = '`/sse ' + req.body.text + '`\n';
-            result += commands[command].run(metadata, args);
-            res.send(result);
+            result += commands[command].run(metadata, args, function (result) {
+                res.send(result); 
+            }, _api);
         }
     });
 
