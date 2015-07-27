@@ -1,6 +1,6 @@
 var _ = require('underscore');
 
-var sendLingoResponse = function (api, lingo, callback) { 
+var sendGetLingoResponse = function (api, lingo, callback) {
     api.Lingo.all({ phrase : lingo }, function (err, res) {
         var returnText = '';
 
@@ -17,7 +17,7 @@ var sendLingoResponse = function (api, lingo, callback) {
     });
 };
 
-var sendLingoListResponse = function (api, callback) {
+var sendGetLingoListResponse = function (api, callback) {
     var returnText = 'Use `/sse lingo <phrase> for a definition of any of the' +
         ' following: ';
 
@@ -34,10 +34,10 @@ var api = {
         if (!(args && args.length)) {
             callback(this.help(true));
         } else if (args[0] === 'list') {
-            sendLingoListResponse(api, callback);
+            sendGetLingoListResponse(api, callback);
         } else {
             var lingo = args.join(' ');
-            sendLingoResponse(api, lingo, callback);
+            sendGetLingoResponse(api, lingo, callback);
         }
     },
 
