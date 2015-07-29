@@ -6,7 +6,7 @@
 //
 //Commands:
 //  hubot sse lingo list - See all SSE lingo entries
-//  hubot sse lingo <phrase> - See the definition of any listed phrases;
+//  hubot sse lingo <phrase> - See the definition of any listed phrases
 
 var Lingo = require('./api').Lingo;
 
