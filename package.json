@@ -10,7 +10,7 @@
     }
   ],
   "scripts": {
-    "start": "node src/js/server.js"
+    "create": "node bin/new-command"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,6 @@
     "url": "https://github.com/rit-sse/slushy/issues"
   },
   "dependencies": {
-    "body-parser": "^1.13.2",
-    "express": "^4.13.1",
-    "sse-api-client": "rit-sse/api-client",
-    "underscore": "^1.8.3"
+    "sse-api-client": "rit-sse/api-client"
   }
 }

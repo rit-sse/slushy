@@ -8,7 +8,9 @@ module.exports = function (robot, scripts) {
       var dir = fs.readdirSync(scriptsPath);
       for(var i = 0; i < dir.length; i++) {
         var script = dir[i];
-        if(scripts && scripts.indexOf('*') === -1) {
+        if(script === 'api.js') {
+          continue;
+        } else if(scripts && scripts.indexOf('*') === -1) {
           if(scripts.indexOf(scripts) !== -1) {
             robot.loadFile(scriptPath, script);
           }
