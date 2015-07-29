@@ -10,7 +10,6 @@
     }
   ],
   "scripts": {
-    "create": "node bin/new-command"
   },
   "repository": {
     "type": "git",
