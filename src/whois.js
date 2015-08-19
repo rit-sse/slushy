@@ -15,12 +15,12 @@ var Users = api.Users;
 
 function getWhoisResponse(robot, msg, position) {
   Officers
-    .all({ title: position, active: true })
+    .all({ email: position, active: true })
     .then(function handle(body) {
       if (res.body.total === 0) {
         robot.send({ room: msg.envelope.user.name }, 'Unrecognized position: ' +
           position + '. `<position>` can be any of the following SSE positions:\n' +
-          'president, vice president, treasurer, secretary, mentoring' +
+          'president, vp, treasurer, secretary, mentoring' +
           ', projects, events, fundraising, technology, winter ball, ' +
           'pr, lab ops');
       } else {
