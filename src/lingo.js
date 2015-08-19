@@ -1,12 +1,14 @@
 // Description:
-//  Look up the definitions of commonly-used phrases within the SSE
+//    Look up the definitions of commonly-used phrases within the SSE
 //
 // Configuration:
-//  SSE_API_ROOT - root to the api
+//    SSE_API_ROOT - root to the api
 //
 // Commands:
-//  hubot sse lingo list - See all SSE lingo entries
-//  hubot sse lingo <phrase> - See the definition of any listed phrases
+//    hubot sse lingo list - See all SSE lingo entries
+//    hubot sse lingo <phrase> - See the definition of any listed phrases
+// Author:
+//    kristenmills, mok4ry
 'use strict';
 
 function sendGetLingoResponse(robot, msg, phrase, Lingo) {

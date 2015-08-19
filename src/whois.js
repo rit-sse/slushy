@@ -6,7 +6,10 @@
 //  SSE_API_ROOT - root to the api
 //
 // Commands:
-//  hubot sse whois <position> - See all SSE lingo entries
+//  hubot sse whois <position> - See who is a current officer position
+//
+// Author:
+//    kristenmills, mok4ry
 'use strict';
 
 var api = require('./api')();
@@ -17,7 +20,6 @@ function getWhoisResponse(robot, msg, position) {
   Officers
     .all({ email: position, active: true })
     .then(function handle(body) {
-      console.log(body);
       if (body.total === 0) {
         robot.send({ room: msg.envelope.user.name }, 'Unrecognized position: ' +
           position + '. `<position>` can be any of the following SSE positions:\n' +
@@ -30,7 +32,6 @@ function getWhoisResponse(robot, msg, position) {
         Users
           .one(officer.userDce)
           .then(function handleUser(userBody) {
-            var user = body;
             robot.send({ room: msg.envelope.user.name }, position + ': ' + userBody.firstName + ' ' +
               userBody.lastName);
           });
@@ -41,7 +42,7 @@ function getWhoisResponse(robot, msg, position) {
 module.exports = function listener(robot) {
   var listenerMetadata = {
     id: 'sse.whois',
-    help: ['hubot sse whois <position> - See all SSE lingo entries'],
+    help: ['hubot sse whois <position> - See who is an officer in the SSE'],
   };
 
   robot.respond(/sse whois (.+)/i, listenerMetadata, function handle(msg) {
