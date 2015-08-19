@@ -2,15 +2,20 @@
   "name": "slushy",
   "version": "0.0.1",
   "description": "The one-stop shop SSE Slack integration",
-  "author": "Society of Software Engineers @ RIT <president@sse.se.rit.edu>",
+  "author": "Society of Software Engineers @ RIT",
+  "license": "MIT",
   "contributors": [
     {
       "name": "Matt Mokary",
       "email": "mxm6060@rit.edu"
+    },
+    {
+      "name": "Kristen Mills",
+      "email": "kristen@kristen-mills.com"
     }
   ],
   "scripts": {
-    "start": "node src/js/server.js"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -20,9 +25,9 @@
     "url": "https://github.com/rit-sse/slushy/issues"
   },
   "dependencies": {
-    "body-parser": "^1.13.2",
-    "express": "^4.13.1",
-    "sse-api-client": "rit-sse/api-client",
-    "underscore": "^1.8.3"
+    "sse-api-client": "rit-sse/api-client"
+  },
+  "devDependencies": {
+    "eslint": "^1.2.0"
   }
 }
