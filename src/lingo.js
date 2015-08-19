@@ -12,15 +12,15 @@
 function sendGetLingoResponse(robot, msg, phrase, Lingo) {
   return Lingo
     .all({ phrase: phrase })
-    .then(function handle(res) {
+    .then(function handle(body) {
       var returnText = '';
 
-      if (res.body.total === 0) {
+      if (body.total === 0) {
         returnText = phrase + ' was not recognized as SSE lingo. Talk to a' +
           ' mentor or SSE officer to have it added! Type `' + robot.alias +
           'sse lingo list` to see all lingo entries.';
       } else {
-        var entry = res.body.data[0];
+        var entry = body.data[0];
         returnText = entry.phrase + ' -- ' + entry.definition;
       }
 
@@ -34,8 +34,8 @@ function sendGetLingoListResponse(robot, msg, Lingo) {
 
   Lingo
     .all({ perPage: 50 })
-    .then(function handle(res) {
-      var lingos = res.body.data;
+    .then(function handle(body) {
+      var lingos = body.data;
       var phrases = lingos.map(function phrase(lingo) {
         return lingo.phrase;
       });
