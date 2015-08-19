@@ -17,7 +17,7 @@ function getWhoisResponse(robot, msg, position) {
   Officers
     .all({ email: position, active: true })
     .then(function handle(body) {
-      if (res.body.total === 0) {
+      if (body.total === 0) {
         robot.send({ room: msg.envelope.user.name }, 'Unrecognized position: ' +
           position + '. `<position>` can be any of the following SSE positions:\n' +
           'president, vp, treasurer, secretary, mentoring' +
