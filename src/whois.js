@@ -38,7 +38,12 @@ function getWhoisResponse(robot, msg, position) {
 }
 
 module.exports = function listener(robot) {
-  robot.respond(/sse whois (.+)/i, function handle(msg) {
+  var listenerMetadata = {
+    id: 'sse.whois',
+    help: ['hubot sse whois <position> - See all SSE lingo entries'],
+  };
+
+  robot.respond(/sse whois (.+)/i, listenerMetadata, function handle(msg) {
     getWhoisResponse(robot, msg, msg.match[1]);
   });
 };
