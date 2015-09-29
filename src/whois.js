@@ -18,7 +18,7 @@ var Users = api.Users;
 
 function getWhoisResponse(robot, msg, position) {
   Officers
-    .all({ email: position, active: true })
+    .all({ email: position, active: new Date() })
     .then(function handle(body) {
       if (body.total === 0) {
         robot.send({ room: msg.envelope.user.name }, 'Unrecognized position: ' +
